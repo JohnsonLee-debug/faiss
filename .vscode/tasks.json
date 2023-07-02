@@ -1,0 +1,34 @@
+{
+        "version": "2.0.0",
+        "presentation": {
+                "reveal": "always"
+        },
+        "tasks": [
+                {
+                        "type": "shell",
+                        "label": "Step 1: Invoking CMake",
+                        "command": "cmake",
+                        "panel": "new",
+                        "reveal": "always",
+                        "args": [
+                                "-B",
+                                "${workspaceFolder}/build",
+                                "${workspaceFolder}",
+                                "-DFAISS_ENABLE_GPU=OFF",
+                                "-DBUILD_TESTING=ON"
+                        ]
+                },
+                {
+                        "type": "shell",
+                        "label": "Step 2: Make faiss",
+                        "command": "make",
+                        "args": ["-C", "build", "-j8", "faiss"]
+                },
+                {
+                        "type": "shell",
+                        "label": "Step 3: Make python bindings",
+                        "command": "make",
+                        "args": ["-C", "build", "-j", "swigfaiss"]
+                }
+        ]
+}
